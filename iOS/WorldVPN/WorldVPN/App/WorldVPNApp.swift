@@ -11,7 +11,8 @@ import SwiftUI
 struct WorldVPNApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GlobeContainerView()
+                .preferredColorScheme(.dark)
         }
     }
 }

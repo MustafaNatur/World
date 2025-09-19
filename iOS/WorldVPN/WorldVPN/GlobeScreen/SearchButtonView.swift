@@ -7,24 +7,8 @@
 
 import SwiftUI
 
-// MARK: - Presentable Models
-
-/// Presentable data for the reset button component
-struct GlobeResetButtonPresentable {
+struct SearchButtonView: View {
     let onTap: () -> Void
-}
-
-// MARK: - GlobeResetButtonView (Simple View Component)
-
-/// Simple View component for the floating reset button
-/// Contains no state, only receives props and presentable data
-struct GlobeResetButtonView: View {
-    
-    // MARK: - Properties
-    
-    let presentable: GlobeResetButtonPresentable
-    
-    // MARK: - Body
     
     var body: some View {
         VStack {
@@ -37,13 +21,10 @@ struct GlobeResetButtonView: View {
             Spacer()
         }
     }
-    
-    // MARK: - Private Views
-    
-    /// Semi-transparent floating reset button with globe icon
+
     private var resetButton: some View {
-        Button(action: presentable.onTap) {
-            Image(systemName: "globe")
+        Button(action: onTap) {
+            Image(systemName: "magnifyingglass")
                 .font(.title2)
                 .foregroundColor(.white)
                 .frame(width: 44, height: 44)
@@ -57,6 +38,6 @@ struct GlobeResetButtonView: View {
                 )
                 .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
         }
-        .buttonStyle(.plain) // Prevent default button styling
+        .buttonStyle(.plain)
     }
 }
