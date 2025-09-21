@@ -14,14 +14,16 @@ struct ConnectionContainerView: View {
     var body: some View {
         NavigationStack {
             ConnectionView(
-                connectionState: globeViewModel.connectionState,
-                chosenCountry: globeViewModel.chosenCountry,
-                onConnectionTap: {
-                    globeViewModel.handleConnectionTap()
-                },
-                onCountryTap: {
-                    showCountriesList = true
-                }
+                presentable: ConnectionView.Presentable(
+                    connectionState: globeViewModel.connectionState,
+                    chosenCountry: globeViewModel.chosenCountry,
+                    onConnectionTap: {
+                        globeViewModel.handleConnectionTap()
+                    },
+                    onCountryTap: {
+                        showCountriesList = true
+                    }
+                )
             )
             .navigationDestination(isPresented: $showCountriesList) {
                 CountriesListView(selectedCountry: $globeViewModel.chosenCountry)

@@ -17,13 +17,11 @@ struct GlobeMapView: View {
     let presentable: Presentable
 
     var body: some View {
-        ZStack {
-            Map(position: presentable.cameraPosition)
-                .mapStyle(.hybrid(elevation: .realistic))
-                .ignoresSafeArea(.all)
-        }
-        .onTapGesture { location in
-            presentable.onTap(location)
-        }
+        Map(position: presentable.cameraPosition)
+            .mapStyle(.hybrid(elevation: .realistic))
+            .ignoresSafeArea(.all)
+            .onTapGesture { location in
+                presentable.onTap(location)
+            }
     }
 }

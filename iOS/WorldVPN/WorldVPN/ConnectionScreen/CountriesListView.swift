@@ -14,20 +14,16 @@ struct CountriesListView: View {
 
     var filteredCountries: [Country] {
         if searchText.isEmpty {
-            return Country.sampleData
+            .mock
         } else {
-            return Country.sampleData.filter { 
-                $0.name.lowercased().contains(searchText.lowercased()) 
+            .mock.filter {
+                $0.name.lowercased().contains(searchText.lowercased())
             }
         }
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            // Search Bar
-
-
-            // Countries List
             ScrollView {
                 HStack {
                     Image(systemName: "magnifyingglass")
@@ -50,8 +46,6 @@ struct CountriesListView: View {
                 .background(Color.secondary)
                 .clipShape(.capsule)
                 .padding(.horizontal)
-//                .padding(.top, 20)
-
 
                 LazyVStack(spacing: 0) {
                     ForEach(filteredCountries) { country in
@@ -117,6 +111,6 @@ struct CountryRowView: View {
 
 #Preview {
     NavigationStack {
-        CountriesListView(selectedCountry: .constant(Country.sampleData.first))
+        CountriesListView(selectedCountry: .constant(.mock))
     }
 }

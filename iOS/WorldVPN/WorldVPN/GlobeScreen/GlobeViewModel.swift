@@ -66,7 +66,7 @@ final class GlobeViewModel {
     
     func animateToCountry(_ country: Country) {
         let countryCamera = MapCamera(
-            centerCoordinate: country.coordinate,
+            centerCoordinate: country.location.coordinate,
             distance: config.initialDistance,
             heading: config.initialHeading,
             pitch: config.initialPitch

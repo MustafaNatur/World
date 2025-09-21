@@ -15,7 +15,7 @@ protocol VPNConnectionProvider {
 class VPNConnectionProviderImpl: VPNConnectionProvider {
     func fetchCountries() async throws -> [Country] {
         try await Task.sleep(for: .seconds(3))
-        return Country.sampleData
+        return .mock
     }
 
     func connect() async throws {
