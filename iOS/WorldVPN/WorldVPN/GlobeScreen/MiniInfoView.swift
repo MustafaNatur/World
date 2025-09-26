@@ -9,33 +9,28 @@ import SwiftUI
 
 struct MiniInfoView: View {
     struct Presentable {
-        let chosenCountry: Country?
-        let connectionState: ConnectionButtonView.ConnectionState
+        let chosenServer: Server?
+        let connectionState: ConnectionButtonView.Presentable.ConnectionState
     }
-    
     let presentable: Presentable
-    
+
     var body: some View {
         HStack(spacing: 12) {
             CountryInfoSection
-            
             Spacer()
-            
             ConnectionStatusBadge
         }
         .padding(.horizontal, 32)
-        .padding(.top, 16)
+        .padding(.top, UIDevice.isiPad ? 0 : 16)
     }
-    
-    // MARK: - Sub-views as computed vars
     
     private var CountryInfoSection: some View {
         HStack(spacing: 8) {
-            if let country = presentable.chosenCountry {
-                CountryFlag(emoji: country.emoji)
-                
+            if let location = presentable.chosenServer?.location {
+                CountryFlag(emoji: location.flagEmoji ?? "🌎")
+
                 CountryDetails(
-                    countryName: country.name,
+                    countryName: location.city,
                     isSelected: true
                 )
             } else {
@@ -45,11 +40,6 @@ struct MiniInfoView: View {
                 )
             }
         }
-    }
-    
-    private var CountryFlag: some View {
-        Text(presentable.chosenCountry?.emoji ?? "🌍")
-            .font(.largeTitle)
     }
     
     private func CountryFlag(emoji: String) -> some View {
@@ -141,25 +131,31 @@ struct MiniInfoView: View {
     }
 }
 
+extension UIDevice {
+    fileprivate static var isiPad: Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+}
+
 #Preview {
     VStack(spacing: 20) {
         MiniInfoView(
             presentable: MiniInfoView.Presentable(
-                chosenCountry: .mock,
+                chosenServer: .mock,
                 connectionState: .connected
             )
         )
         
         MiniInfoView(
             presentable: MiniInfoView.Presentable(
-                chosenCountry: .mock,
+                chosenServer: .mock,
                 connectionState: .loading
             )
         )
         
         MiniInfoView(
             presentable: MiniInfoView.Presentable(
-                chosenCountry: nil,
+                chosenServer: nil,
                 connectionState: .notConnected
             )
         )

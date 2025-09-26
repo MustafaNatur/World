@@ -12,22 +12,23 @@ struct ConnectionContainerView: View {
     @State private var showCountriesList = false
 
     var body: some View {
-        NavigationStack {
-            ConnectionView(
-                presentable: ConnectionView.Presentable(
-                    connectionState: globeViewModel.connectionState,
-                    chosenCountry: globeViewModel.chosenCountry,
-                    onConnectionTap: {
-                        globeViewModel.handleConnectionTap()
-                    },
-                    onCountryTap: {
-                        showCountriesList = true
-                    }
-                )
+        ConnectionView(
+            presentable: ConnectionView.Presentable(
+                connectionState: globeViewModel.connectionState,
+                chosenServer: globeViewModel.chosenServer,
+                onConnectionTap: {
+                    globeViewModel.handleConnectionTap()
+                },
+                onCountryTap: {
+                    showCountriesList = true
+                }
             )
-            .navigationDestination(isPresented: $showCountriesList) {
-                CountriesListView(selectedCountry: $globeViewModel.chosenCountry)
-            }
+        )
+        .sheet(isPresented: $showCountriesList) {
+            ServersListView(
+                servers: Array(globeViewModel.serversData.keys),
+                selectedServer: $globeViewModel.chosenServer
+            )
         }
     }
 }

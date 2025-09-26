@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ConnectionView: View {
     struct Presentable {
-        let connectionState: ConnectionButtonView.ConnectionState
-        let chosenCountry: Country?
+        let connectionState: ConnectionButtonView.Presentable.ConnectionState
+        let chosenServer: Server?
         let onConnectionTap: () -> Void
         let onCountryTap: () -> Void
     }
@@ -82,7 +82,7 @@ struct ConnectionView: View {
     }
     
     private var CountryFlag: some View {
-        Text(presentable.chosenCountry?.emoji ?? "🌍")
+        Text(presentable.chosenServer?.location.flagEmoji ?? "🌍")
             .font(.system(size: 32))
             .frame(width: 50, height: 50)
             .background(.ultraThinMaterial)
@@ -91,12 +91,12 @@ struct ConnectionView: View {
     
     private var CountryInfo: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(presentable.chosenCountry?.name ?? "Choose Country")
+            Text(presentable.chosenServer?.location.city ?? "Choose Country")
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundStyle(.primary)
             
-            Text(presentable.chosenCountry != nil ? "Tap to change" : "Select your preferred location")
+            Text(presentable.chosenServer != nil ? "Tap to change" : "Select your preferred location")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -113,7 +113,7 @@ struct ConnectionView: View {
     ConnectionView(
         presentable: ConnectionView.Presentable(
             connectionState: .notConnected,
-            chosenCountry: .mock,
+            chosenServer: .mock,
             onConnectionTap: {},
             onCountryTap: {}
         )

@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ConnectionButtonView: View {
-    enum ConnectionState {
-        case loading
-        case connected
-        case notConnected
-    }
-    
     struct Presentable {
+        enum ConnectionState {
+            case loading
+            case connected
+            case notConnected
+        }
+
         let state: ConnectionState
         let onTap: () -> Void
     }

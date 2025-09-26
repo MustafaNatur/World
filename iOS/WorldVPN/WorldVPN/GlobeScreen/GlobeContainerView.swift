@@ -11,19 +11,18 @@ import MapKit
 struct GlobeContainerView: View {
     @State private var viewModel = GlobeViewModel()
     @State private var showSheet: Bool = false
-    @State private var selectedDetent: PresentationDetent = .fraction(0.50)
+    @State private var selectedDetent: PresentationDetent = .full
+    @State private var sheetHeight: CGFloat = 0
 
     var body: some View {
         GlobeMapView(
             presentable: GlobeMapView.Presentable(
                 cameraPosition: $viewModel.cameraPosition,
-                onTap: { location in
-                    viewModel.handleMapTap(at: location)
-                }
+                servers: viewModel.serversData
             )
         )
-        .overlay(alignment: .bottomTrailing) {
-            SearchButton
+        .task {
+            await viewModel.loadSevers()
         }
         .onAppear {
             if viewModel.hasAnimatedToInitialPosition == false {
@@ -31,48 +30,61 @@ struct GlobeContainerView: View {
             }
             showSheet = true
         }
-        .onChange(of: viewModel.chosenCountry) { _, newCountry in
-            if let country = newCountry {
-                viewModel.animateToCountry(country)
+        .onChange(of: viewModel.chosenServer) { _, newServer in
+            if let server = newServer {
+                viewModel.animateToServer(server)
             }
         }
         .sheet(isPresented: $showSheet) {
             SheetContent
+                .background(
+                    GeometryReader { geometry in
+                        Color.clear
+                            .onAppear {
+                                sheetHeight = geometry.size.height
+                            }
+                            .onChange(of: geometry.size.height) { _, newHeight in
+                                sheetHeight = newHeight
+                                print(sheetHeight)
+                            }
+                    }
+                )
         }
     }
-    
-    // MARK: - Sub-views as computed vars
-    
-    private var SearchButton: some View {
-        SearchButtonView(
-            presentable: SearchButtonView.Presentable {
-                showSheet = true
-            }
+
+    private var InfoView: some View {
+        MiniInfoView(
+            presentable: MiniInfoView.Presentable(
+                chosenServer: viewModel.chosenServer,
+                connectionState: viewModel.connectionState
+            )
         )
-        .opacity(showSheet ? 0 : 1)
-        .animation(.default, value: showSheet)
+        .opacity(selectedDetent == .small ? 1 : 0)
+        .onTapGesture {
+            selectedDetent = .full
+        }
     }
-    
+
+    private var ConnectionView: some View {
+        ConnectionContainerView(globeViewModel: viewModel)
+            .opacity(selectedDetent == .full || selectedDetent == .large ? 1 : 0)
+    }
+
     private var SheetContent: some View {
         ZStack(alignment: .center) {
-            MiniInfoView(
-                presentable: MiniInfoView.Presentable(
-                    chosenCountry: viewModel.chosenCountry,
-                    connectionState: viewModel.connectionState
-                )
-            )
-            .opacity(selectedDetent == .height(100) ? 1 : 0)
-            .onTapGesture {
-                selectedDetent = .fraction(0.50)
-            }
-
-            ConnectionContainerView(globeViewModel: viewModel)
-                .opacity(selectedDetent == .fraction(0.50) || selectedDetent == .large ? 1 : 0)
+            InfoView
+            ConnectionView
         }
-        .presentationDetents([.height(100), .fraction(0.50)], selection: $selectedDetent)
+        .animation(.default, value: selectedDetent)
+        .presentationDetents([.small, .full], selection: $selectedDetent)
         .presentationBackgroundInteraction(.enabled)
         .interactiveDismissDisabled()
     }
+}
+
+extension PresentationDetent {
+    static let full: PresentationDetent = .height(370)
+    static let small: PresentationDetent = .height(100)
 }
 
 #Preview {

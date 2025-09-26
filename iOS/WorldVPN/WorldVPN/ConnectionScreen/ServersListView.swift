@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-struct CountriesListView: View {
-    @Binding var selectedCountry: Country?
+struct ServersListView: View {
+    let servers: [Server]
+    @Binding var selectedServer: Server?
     @State private var searchText = ""
     @Environment(\.dismiss) private var dismiss
 
-    var filteredCountries: [Country] {
+    var filteredCountries: [Server] {
         if searchText.isEmpty {
-            .mock
+            servers
         } else {
-            .mock.filter {
+            servers.filter {
                 $0.name.lowercased().contains(searchText.lowercased())
             }
         }
@@ -48,19 +49,19 @@ struct CountriesListView: View {
                 .padding(.horizontal)
 
                 LazyVStack(spacing: 0) {
-                    ForEach(filteredCountries) { country in
-                        CountryRowView(
-                            country: country,
-                            isSelected: selectedCountry?.id == country.id,
+                    ForEach(filteredCountries) { server in
+                        ServerRowView(
+                            server: server,
+                            isSelected: selectedServer?.id == server.id,
                             onTap: {
-                                selectedCountry = country
+                                selectedServer = server
                                 dismiss()
                             }
                         )
                         .padding(.horizontal)
                         .padding(.vertical, 8)
-
-                        if country.id != filteredCountries.last?.id {
+                        
+                        if server.id != filteredCountries.last?.id {
                             Divider()
                                 .padding(.leading)
                         }
@@ -69,25 +70,22 @@ struct CountriesListView: View {
             }
             .padding(.top, 16)
         }
-        .navigationTitle("Choose Country")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(false)
     }
 }
 
-struct CountryRowView: View {
-    let country: Country
+struct ServerRowView: View {
+    let server: Server
     let isSelected: Bool
     let onTap: () -> Void
     
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 16) {
-                Text(country.emoji)
+                Text(server.location.flagEmoji ?? "🌎")
                     .font(.largeTitle)
                     .frame(width: 40, height: 40)
                 
-                Text(country.name)
+                Text(server.location.city)
                     .font(.body)
                     .foregroundColor(.primary)
                 
@@ -111,6 +109,6 @@ struct CountryRowView: View {
 
 #Preview {
     NavigationStack {
-        CountriesListView(selectedCountry: .constant(.mock))
+        ServersListView(servers: .mock, selectedServer: .constant(.mock))
     }
 }
