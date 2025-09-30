@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import Combine
 import Observation
 import UIKit
 
@@ -42,10 +43,45 @@ final class GlobeViewModel {
     var serversData: [Server: CLLocation] = [:]
     let config: Config
     let vpnService: VPNService
+    let vpnConnectionManager: VPNConnectionManager
 
-    init(config: Config = .default, vpnService: VPNService = VPNServiceImpl()) {
+    private var cancellables: Set<AnyCancellable> = []
+
+    init(
+        config: Config = .default,
+        vpnService: VPNService = VPNServiceImpl(),
+        vpnConnectionManager: VPNConnectionManager = VPNConnectionManager()
+    ) {
         self.config = config
         self.vpnService = vpnService
+        self.vpnConnectionManager = vpnConnectionManager
+
+        vpnConnectionManager.$state
+            .sink { [weak self] state in
+                self?.handleConnectionStateChange(state)
+            }
+            .store(in: &cancellables)
+    }
+
+    deinit {
+        cancellables.removeAll()
+    }
+
+    private func handleConnectionStateChange(_ newState: VPNConnectionState) {
+        switch newState {
+        case .connected:
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            connectionState = .connected
+        case .disconnected:
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
+            connectionState = .notConnected
+        case .connecting:
+            connectionState = .loading
+        case .disconnecting:
+            connectionState = .loading
+        }
+
+
     }
 
     func loadSevers() async {
@@ -116,34 +152,15 @@ final class GlobeViewModel {
     func handleConnectionTap() {
         switch connectionState {
         case .notConnected:
-            // Light haptic for starting connection
-            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-            impactFeedback.impactOccurred()
-            
-            connectionState = .loading
-            // Simulate connection process
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.connectionState = .connected
-                if let chosenServer = self.chosenServer {
-                    self.animateToServer(chosenServer)
-                }
-                
-                // Success haptic for successful connection
-                let successFeedback = UINotificationFeedbackGenerator()
-                successFeedback.notificationOccurred(.success)
-            }
+            guard let chosenServer else { return }
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            try? vpnConnectionManager.connect(to: chosenServer, with: .IKEv2)
         case .loading:
-            // Medium haptic for canceling connection
-            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-            impactFeedback.impactOccurred()
-            
-            connectionState = .notConnected
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            vpnConnectionManager.disconnect()
         case .connected:
-            // Heavy haptic for disconnecting
-            let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
-            impactFeedback.impactOccurred()
-            
-            connectionState = .notConnected
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            vpnConnectionManager.disconnect()
         }
     }
 }

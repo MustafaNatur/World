@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkExtension
 
 enum VPNProtocolConfig {
     case IKEv2(NEVPNProtocolIKEv2)
