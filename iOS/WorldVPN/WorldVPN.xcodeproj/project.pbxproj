@@ -21,7 +21,6 @@
 
 /* Begin PBXFileReference section */
 		4535E32C2E78E1CE00B4EEF3 /* WorldVPN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldVPN.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		45E82EBD2E88BB5E0083F9D1 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -47,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				4535E32E2E78E1CE00B4EEF3 /* WorldVPN */,
-				45E82EBC2E88BB5E0083F9D1 /* Frameworks */,
 				4535E32D2E78E1CE00B4EEF3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,14 +56,6 @@
 				4535E32C2E78E1CE00B4EEF3 /* WorldVPN.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		45E82EBC2E88BB5E0083F9D1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				45E82EBD2E88BB5E0083F9D1 /* NetworkExtension.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,9 +265,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WorldVPN/WorldVPNDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V3HW5C4GT9;
+				DEVELOPMENT_TEAM = 4KPYDMUY2G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
