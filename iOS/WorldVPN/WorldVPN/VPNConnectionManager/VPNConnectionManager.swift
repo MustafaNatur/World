@@ -19,8 +19,9 @@ final class VPNConnectionManager: ObservableObject {
     }
 
     func connect(to server: Server, with protocolType: VPNProtocolType) throws {
-        let connectionProtocolProvider = switch protocolType {
+        let connectionProtocolProvider: ConnectionProtocolProvider = switch protocolType {
         case .IKEv2: IKEv2ConnectionProviderImpl()
+        case .OpenVPN: OpenVPNConnectionProviderImpl()
         }
 
         try connectionProtocolProvider.connect(server: server)
@@ -53,48 +54,4 @@ final class VPNConnectionManager: ObservableObject {
         @unknown default: fatalError()
         }
     }
-}
-
-class IKEv2ConnectionProviderImpl: ConnectionProtocolProvider {
-    private let vpnManager: NEVPNManager
-    private let configFactory: VPNProtocolConfigFactory = VPNProtocolConfigFactory()
-    private var connectionTask: Task<Void, Error>? = nil {
-        willSet {
-            connectionTask?.cancel()
-        }
-    }
-
-    init(vpnManager: NEVPNManager = .shared()) {
-        self.vpnManager = vpnManager
-    }
-
-    func connect(server: Server) throws {
-        vpnManager.loadFromPreferences { loadError in
-            guard loadError == nil else { return }
-
-            let config = self.configFactory.getIKEv2Config(server: server)
-            self.vpnManager.localizedDescription = "Secure IKEv2 VPN"
-            self.vpnManager.protocolConfiguration = config
-            self.vpnManager.isEnabled = true
-
-            self.vpnManager.saveToPreferences { saveError in
-                guard saveError == nil else {
-                    print(saveError)
-                    return
-                }
-
-                self.connectionTask = Task { @MainActor in
-                    try await Task.sleep(for: .seconds(1))
-                    try self.vpnManager.connection.startVPNTunnel()
-                }
-            }
-        }
-    }
-    
-    func disconnect() throws {}
-}
-
-protocol ConnectionProtocolProvider {
-    func connect(server: Server) throws
-    func disconnect() throws
 }

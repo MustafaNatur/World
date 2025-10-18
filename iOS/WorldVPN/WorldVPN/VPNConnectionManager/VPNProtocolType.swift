@@ -9,4 +9,5 @@ import Foundation
 
 enum VPNProtocolType {
     case IKEv2
+    case OpenVPN
 }
