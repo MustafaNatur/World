@@ -20,6 +20,27 @@ final class VPNProtocolConfigFactory {
         )
     }
 
+    func getOpenVPNConfig(server: Server) -> NEVPNProtocol {
+        getOpenVPNConfig(
+            serverAddress: server.ip,
+            remoteIdentifier: server.name
+        )
+    }
+
+    private func getOpenVPNConfig(
+        serverAddress: String,
+        remoteIdentifier: String
+    ) -> NEVPNProtocol {
+        let tunnelProtocol = NETunnelProviderProtocol()
+        tunnelProtocol.username = userName
+        tunnelProtocol.serverAddress = serverAddress
+        tunnelProtocol.providerBundleIdentifier = "com.myBundle.myApp"
+        tunnelProtocol.providerConfiguration = ["ovpn": cert, "username": userName, "password": userPassword]
+        tunnelProtocol.disconnectOnSleep = false
+
+        return tunnelProtocol
+    }
+
     private func getIKEv2Config(
         serverAddress: String,
         remoteIdentifier: String

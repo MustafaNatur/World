@@ -154,7 +154,12 @@ final class GlobeViewModel {
         case .notConnected:
             guard let chosenServer else { return }
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            try? vpnConnectionManager.connect(to: chosenServer, with: .IKEv2)
+            do {
+                try vpnConnectionManager.connect(to: chosenServer, with: .OpenVPN)
+            }
+            catch {
+                print(error)
+            }
         case .loading:
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             vpnConnectionManager.disconnect()

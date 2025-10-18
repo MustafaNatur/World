@@ -6,6 +6,25 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		457CF6782EA3361E004FF381 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CF6772EA3361E004FF381 /* NetworkExtension.framework */; };
+		457CF6802EA3361E004FF381 /* TunnelProvider.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 457CF6752EA3361E004FF381 /* TunnelProvider.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		457CF6872EA3378C004FF381 /* OpenVPNAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 457CF6862EA3378C004FF381 /* OpenVPNAdapter */; };
+		457CF68B2EA33818004FF381 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CF68A2EA33818004FF381 /* SystemConfiguration.framework */; };
+		457CF68C2EA3382B004FF381 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CF68A2EA33818004FF381 /* SystemConfiguration.framework */; };
+		457CF6D32EA338C9004FF381 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CF6D22EA338C9004FF381 /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		457CF67E2EA3361E004FF381 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4535E3242E78E1CE00B4EEF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 457CF6742EA3361E004FF381;
+			remoteInfo = TunnelProvider;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		45E82ECB2E88BB5E0083F9D1 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -13,6 +32,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				457CF6802EA3361E004FF381 /* TunnelProvider.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -21,12 +41,34 @@
 
 /* Begin PBXFileReference section */
 		4535E32C2E78E1CE00B4EEF3 /* WorldVPN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldVPN.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		457CF6752EA3361E004FF381 /* TunnelProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TunnelProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		457CF6772EA3361E004FF381 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		457CF68A2EA33818004FF381 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		457CF6D22EA338C9004FF381 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		457CF6812EA3361E004FF381 /* Exceptions for "TunnelProvider" folder in "TunnelProvider" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 457CF6742EA3361E004FF381 /* TunnelProvider */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4535E32E2E78E1CE00B4EEF3 /* WorldVPN */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WorldVPN;
+			sourceTree = "<group>";
+		};
+		457CF6792EA3361E004FF381 /* TunnelProvider */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				457CF6812EA3361E004FF381 /* Exceptions for "TunnelProvider" folder in "TunnelProvider" target */,
+			);
+			path = TunnelProvider;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -36,6 +78,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457CF68B2EA33818004FF381 /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		457CF6722EA3361E004FF381 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				457CF6782EA3361E004FF381 /* NetworkExtension.framework in Frameworks */,
+				457CF6D32EA338C9004FF381 /* UIKit.framework in Frameworks */,
+				457CF68C2EA3382B004FF381 /* SystemConfiguration.framework in Frameworks */,
+				457CF6872EA3378C004FF381 /* OpenVPNAdapter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				4535E32E2E78E1CE00B4EEF3 /* WorldVPN */,
+				457CF6792EA3361E004FF381 /* TunnelProvider */,
+				457CF6762EA3361E004FF381 /* Frameworks */,
 				4535E32D2E78E1CE00B4EEF3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +110,19 @@
 			isa = PBXGroup;
 			children = (
 				4535E32C2E78E1CE00B4EEF3 /* WorldVPN.app */,
+				457CF6752EA3361E004FF381 /* TunnelProvider.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		457CF6762EA3361E004FF381 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				457CF6D22EA338C9004FF381 /* UIKit.framework */,
+				457CF68A2EA33818004FF381 /* SystemConfiguration.framework */,
+				457CF6772EA3361E004FF381 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -73,6 +140,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				457CF67F2EA3361E004FF381 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				4535E32E2E78E1CE00B4EEF3 /* WorldVPN */,
@@ -83,6 +151,29 @@
 			productName = WorldVPN;
 			productReference = 4535E32C2E78E1CE00B4EEF3 /* WorldVPN.app */;
 			productType = "com.apple.product-type.application";
+		};
+		457CF6742EA3361E004FF381 /* TunnelProvider */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 457CF6822EA3361E004FF381 /* Build configuration list for PBXNativeTarget "TunnelProvider" */;
+			buildPhases = (
+				457CF6712EA3361E004FF381 /* Sources */,
+				457CF6722EA3361E004FF381 /* Frameworks */,
+				457CF6732EA3361E004FF381 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				457CF6792EA3361E004FF381 /* TunnelProvider */,
+			);
+			name = TunnelProvider;
+			packageProductDependencies = (
+				457CF6862EA3378C004FF381 /* OpenVPNAdapter */,
+			);
+			productName = TunnelProvider;
+			productReference = 457CF6752EA3361E004FF381 /* TunnelProvider.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -97,6 +188,9 @@
 					4535E32B2E78E1CE00B4EEF3 = {
 						CreatedOnToolsVersion = 26.0;
 					};
+					457CF6742EA3361E004FF381 = {
+						CreatedOnToolsVersion = 26.0;
+					};
 				};
 			};
 			buildConfigurationList = 4535E3272E78E1CE00B4EEF3 /* Build configuration list for PBXProject "WorldVPN" */;
@@ -108,18 +202,29 @@
 			);
 			mainGroup = 4535E3232E78E1CE00B4EEF3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				457CF6852EA33782004FF381 /* XCRemoteSwiftPackageReference "OpenVPNAdapter" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4535E32D2E78E1CE00B4EEF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				4535E32B2E78E1CE00B4EEF3 /* WorldVPN */,
+				457CF6742EA3361E004FF381 /* TunnelProvider */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4535E32A2E78E1CE00B4EEF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		457CF6732EA3361E004FF381 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -136,7 +241,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		457CF6712EA3361E004FF381 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		457CF67F2EA3361E004FF381 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 457CF6742EA3361E004FF381 /* TunnelProvider */;
+			targetProxy = 457CF67E2EA3361E004FF381 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4535E3352E78E1CF00B4EEF3 /* Debug */ = {
@@ -281,7 +401,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = world.vpn;
+				PRODUCT_BUNDLE_IDENTIFIER = world.vpn.musta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -298,9 +418,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WorldVPN/WorldVPN.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V3HW5C4GT9;
+				DEVELOPMENT_TEAM = 4KPYDMUY2G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -313,11 +434,69 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = world.vpn;
+				PRODUCT_BUNDLE_IDENTIFIER = world.vpn.musta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		457CF6832EA3361E004FF381 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TunnelProvider/TunnelProvider.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KPYDMUY2G;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TunnelProvider/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TunnelProvider;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = world.vpn.musta.TunnelProvider;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		457CF6842EA3361E004FF381 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TunnelProvider/TunnelProvider.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KPYDMUY2G;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TunnelProvider/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TunnelProvider;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = world.vpn.musta.TunnelProvider;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -346,7 +525,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		457CF6822EA3361E004FF381 /* Build configuration list for PBXNativeTarget "TunnelProvider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				457CF6832EA3361E004FF381 /* Debug */,
+				457CF6842EA3361E004FF381 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		457CF6852EA33782004FF381 /* XCRemoteSwiftPackageReference "OpenVPNAdapter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ss-abramchuk/OpenVPNAdapter.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		457CF6862EA3378C004FF381 /* OpenVPNAdapter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 457CF6852EA33782004FF381 /* XCRemoteSwiftPackageReference "OpenVPNAdapter" */;
+			productName = OpenVPNAdapter;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4535E3242E78E1CE00B4EEF3 /* Project object */;
 }

@@ -1,0 +1,15 @@
+{
+  "originHash" : "38fa764a6520cae455acb08d1afc8eb425ccbfe295d35b33b2271f9dca06519d",
+  "pins" : [
+    {
+      "identity" : "openvpnadapter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ss-abramchuk/OpenVPNAdapter.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "33afba081c8592e8632128c7f9d6ebe53cae3d08"
+      }
+    }
+  ],
+  "version" : 3
+}
